@@ -1,4 +1,4 @@
-#include "fftw3.h"
+#include "fftw3.h"  //damit weiß der Compiler was zu tun ist
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -30,10 +30,17 @@ int main(int argc, char** argv){
 	double* inR  = (double*) malloc(sizeof(double)*N);
 
   // Create plan
-	fftw_plan FW  = fftw_plan_dft_r2c_1d(N, inR, f, FFTW_ESTIMATE);
+	fftw_plan FW  = fftw_plan_dft_r2c_1d(N, inR, f, FFTW_ESTIMATE);  // mit welcher Methode soll FFT ausgerechnet werden, wo und wohin gespeichert
 
-	// Read input data
-
+	// Read input data ....Daten aus Datei in Array einlesen
+ifstream input(in_file);
+for (int i = 0; i < N; i++)
+{
+  input >> L; //  das was in Datei input steht, speichere in L ein. (x-Wert) 
+  input >> inR[i]; // f-Wert
+		  // den x-Wert wollen wir gar nicht wissen, deshalb wird dieser von f-Wert überschrieben
+}
+cout << L << '\n';
 	// Call function which reads the data from
 	// the input file into the array inR
 
